@@ -29,18 +29,43 @@ var messageClient = new Message.MessageClient(channel);
 
 //Client Streaming
 
+// var request  = messageClient.SendMessage();
+// for (int i = 0; i < 10; i++)
+// {
+//     await Task.Delay(1000);
+//     await request.RequestStream.WriteAsync(new MessageRequest
+//     {
+//         Message = "Mesaj "+i,
+//         Name = "Dogan"
+//     });
+// }
+// await request.RequestStream.CompleteAsync();
+// System.Console.WriteLine((await request.ResponseAsync).Message);
+
+
+//Bi-Directional Streaming
 var request  = messageClient.SendMessage();
-for (int i = 0; i < 10; i++)
+
+var task1 =  Task.Run(async () => 
 {
-    await Task.Delay(1000);
-    await request.RequestStream.WriteAsync(new MessageRequest
+    for (int i = 0; i < 10; i++)
     {
-        Message = "Mesaj "+i,
-        Name = "Dogan"
-    });
+        await Task.Delay(1000);
+        await request.RequestStream.WriteAsync(new MessageRequest {
+            Name="Ebubekir",
+            Message = "Mesaj" + i
+        });
+    }
+
+});
+CancellationTokenSource cancellationTokenSource = new();
+while (await request.ResponseStream.MoveNext(cancellationTokenSource.Token))
+{
+    System.Console.WriteLine(request.ResponseStream.Current.Message);
+
 }
+await task1;
 await request.RequestStream.CompleteAsync();
-System.Console.WriteLine((await request.ResponseAsync).Message);
 
 // HelloReply result = await greetClient.SayHelloAsync(new HelloRequest
 // {
