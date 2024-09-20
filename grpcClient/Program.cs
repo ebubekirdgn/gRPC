@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using System.Security.Cryptography;
+using Grpc.Net.Client;
 using grpcMessageClient;
 
 // var channel =GrpcChannel.ForAddress("http://localhost:5284");
@@ -7,12 +8,23 @@ using grpcMessageClient;
 var channel =GrpcChannel.ForAddress("http://localhost:5284");
 var messageClient = new Message.MessageClient(channel);
 
-MessageResponse response  = await messageClient.SendMessageAsync(new MessageRequest{
-    Message ="Merhaba ",
-    Name    = "Dogan"
-});
-System.Console.WriteLine(response.Message);  
+//UNARY
+// MessageResponse response  = await messageClient.SendMessageAsync(new MessageRequest{
+//     Message ="Merhaba ",
+//     Name    = "Dogan"
+// });
+//System.Console.WriteLine(response.Message);  
 
+//Server Streaming
+var response = messageClient.SendMessage(new MessageRequest{
+    Message ="Merhaba",
+    Name = "Dogan",
+});
+CancellationTokenSource cancellationTokenSource = new ();
+while (await response.ResponseStream.MoveNext(cancellationTokenSource.Token))
+{
+    System.Console.WriteLine(response.ResponseStream.Current.Message);
+}
 // HelloReply result = await greetClient.SayHelloAsync(new HelloRequest
 // {
 //     Name="Ebubekir'den Selamlar!",
