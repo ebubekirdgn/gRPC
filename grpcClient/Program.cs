@@ -16,15 +16,32 @@ var messageClient = new Message.MessageClient(channel);
 //System.Console.WriteLine(response.Message);  
 
 //Server Streaming
-var response = messageClient.SendMessage(new MessageRequest{
-    Message ="Merhaba",
-    Name = "Dogan",
-});
-CancellationTokenSource cancellationTokenSource = new ();
-while (await response.ResponseStream.MoveNext(cancellationTokenSource.Token))
+// var response = messageClient.SendMessage(new MessageRequest{
+//     Message ="Merhaba",
+//     Name = "Dogan",
+// });
+// CancellationTokenSource cancellationTokenSource = new ();
+// while (await response.ResponseStream.MoveNext(cancellationTokenSource.Token))
+// {
+//     System.Console.WriteLine(response.ResponseStream.Current.Message);
+// }
+
+
+//Client Streaming
+
+var request  = messageClient.SendMessage();
+for (int i = 0; i < 10; i++)
 {
-    System.Console.WriteLine(response.ResponseStream.Current.Message);
+    await Task.Delay(1000);
+    await request.RequestStream.WriteAsync(new MessageRequest
+    {
+        Message = "Mesaj "+i,
+        Name = "Dogan"
+    });
 }
+await request.RequestStream.CompleteAsync();
+System.Console.WriteLine((await request.ResponseAsync).Message);
+
 // HelloReply result = await greetClient.SayHelloAsync(new HelloRequest
 // {
 //     Name="Ebubekir'den Selamlar!",
