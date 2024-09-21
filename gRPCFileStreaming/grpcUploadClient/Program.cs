@@ -7,7 +7,7 @@ var channel = GrpcChannel.ForAddress("http://localhost:5010");
 var client = new FileService.FileServiceClient(channel);
 
 string file = "C:/Users/DoganPc/Downloads/SSMS-Setup-ENU.exe";
-
+ 
 using FileStream fileStream = new FileStream(file, FileMode.Open);
 
 var content = new BytesContent
