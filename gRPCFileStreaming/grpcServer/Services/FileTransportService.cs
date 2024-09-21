@@ -43,7 +43,8 @@ public class FileTransportService : FileServiceBase
         }
         catch (System.Exception e)
         {
-            System.Console.WriteLine(e.Message);
+             System.Console.WriteLine($"An error occurred: {e.Message}");
+             throw; 
         }
         await fileStream!.DisposeAsync();
         fileStream.Close();
