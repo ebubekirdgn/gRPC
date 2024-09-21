@@ -1,4 +1,5 @@
 # gRPC File Streaming Application
+![Description of the GIF](https://www.webhostdesignpost.com/img/transferring-files.gif)
 
 This repository contains a gRPC-based file streaming application that supports both client and server streaming. The application allows efficient file upload and download using the power of gRPC for high-performance communication.
 
