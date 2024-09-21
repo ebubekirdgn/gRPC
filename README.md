@@ -8,7 +8,7 @@ This repository contains a gRPC-based file streaming application that supports b
 
 ## Technologies & Libraries
 This project utilizes the following technologies and libraries:
-- **.NET 6**
+- **.NET 8**
 - **gRPC**
 - **Protocol Buffers**
 
