@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\DoganPc\\Documents\\GitHub\\gRPCFileStreaming\\grpcServer\\wwwroot\\files\\SSMS-Setup-ENU.exe",
+      "PackagePath": "staticwebassets\\files\\SSMS-Setup-ENU.exe"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.grpcServer.props",
+      "PackagePath": "build\\grpcServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.grpcServer.props",
+      "PackagePath": "buildMultiTargeting\\grpcServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.grpcServer.props",
+      "PackagePath": "buildTransitive\\grpcServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.grpcServer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
